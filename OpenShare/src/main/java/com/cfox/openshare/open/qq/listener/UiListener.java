@@ -1,6 +1,5 @@
 package com.cfox.openshare.open.qq.listener;
 
-import com.cfox.openshare.listener.AuthListener;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.UiError;
 

@@ -1,15 +1,18 @@
 package com.cfox.openshare.open.qq;
 
 import android.app.Activity;
-import android.content.Context;
 
 import com.cfox.openshare.OpenShareAPI;
+import com.cfox.openshare.PlatformConfig;
 import com.cfox.openshare.SHARE_MEDIA;
-import com.cfox.openshare.listener.AuthListener;
+import com.cfox.openshare.listener.IAuthListener;
 import com.cfox.openshare.open.ICenter;
-import com.cfox.openshare.open.qq.listener.UiListener;
+import com.cfox.openshare.open.qq.listener.QOpenListener;
 import com.cfox.openshare.utils.OSLog;
+import com.tencent.connect.UserInfo;
 import com.tencent.tauth.Tencent;
+
+import java.util.Map;
 
 /**
  * <br/>************************************************
@@ -21,39 +24,75 @@ import com.tencent.tauth.Tencent;
  */
 public class QQCenter implements ICenter {
 
-    private Context mContext;
+    private Activity mActivity;
     private Tencent mTencent;
 
     private QQConfig mQQConfig;
 
-    public QQCenter(Context context){
-        this.mContext = context.getApplicationContext();
-        mQQConfig = (QQConfig) OpenShareAPI.configs.get(SHARE_MEDIA.QQ);
+
+    public QQCenter(Activity activity){
+        this.mActivity = activity;
+        mQQConfig = (QQConfig) PlatformConfig.configs.get(SHARE_MEDIA.QQ);
         if (mQQConfig == null){
             OSLog.e("openshare","place set appid and appSecret");
             return;
         }
-        mTencent = Tencent.createInstance(mQQConfig.appId, mContext);
+        mTencent = Tencent.createInstance(mQQConfig.appId, mActivity.getApplicationContext());
     }
 
     /**
      * 登录QQ
      */
     @Override
-    public void login(AuthListener listener){
+    public void login(IAuthListener listener){
         if (!mTencent.isSessionValid()) {
-            mTencent.login((Activity) mContext, "all", new UiListener(UiListener.LOGIN,listener));
+            QOpenListener QOpenListener = new QOpenListener();
+            QOpenListener.sign = QOpenListener.LOGIN;
+            QOpenListener.mParse = OpenShareAPI.getParse();
+            QOpenListener.mListener = listener;
+            mTencent.login(mActivity, "all", QOpenListener);
         }else {
-            OSLog.e("openshare","place set appid and appSecret");
+            OSLog.e("openshare","Please set the AppId and appSecret");
         }
     }
+
+    /**
+     * QQ 登出
+     */
+    @Override
+    public void logout() {
+        mTencent.logout(mActivity);
+    }
+
 
     /**
      * 获取用户信息
      */
     @Override
-    public void getUserInfo(AuthListener listener){
+    public void getUserInfo(IAuthListener listener){
 
+        QQConfig qqConfig = (QQConfig) PlatformConfig.configs.get(SHARE_MEDIA.QQ);
+
+        if (qqConfig == null){
+            OSLog.e("openshare","place set appid and appSecret");
+            return;
+        }
+        Map<String,String> authInfo = qqConfig.authInfo;
+
+        String openId = authInfo.get("openid");
+        String accessToken = authInfo.get("access_token");
+        String expiresIn = authInfo.get("expires_in");
+
+        mTencent.setOpenId(openId);
+        mTencent.setAccessToken(accessToken,expiresIn);
+
+
+        QOpenListener QOpenListener = new QOpenListener();
+        QOpenListener.sign = QOpenListener.LOGIN;
+        QOpenListener.mParse = OpenShareAPI.getParse();
+        QOpenListener.mListener = listener;
+
+        UserInfo userInfo = new UserInfo(mActivity, mTencent.getQQToken());
+        userInfo.getUserInfo(QOpenListener);
     }
-
 }

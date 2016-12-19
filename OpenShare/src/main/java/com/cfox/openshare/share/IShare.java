@@ -1,16 +1,14 @@
-package com.cfox.openshare.listener;
-
-import java.util.Map;
+package com.cfox.openshare.share;
 
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
- * <br/>PACKAGE_NAME : com.cfox.openshare.listener
+ * <br/>PACKAGE_NAME : com.cfox.openshare.share
  * <br/>AUTHOR : Machao
  * <br/>MSG :
  * <br/>************************************************
  */
-public abstract class MapAuthListener implements AuthListener<Map<String,String>> {
+public interface IShare {
 
-
+    public void share(ShareAPI shareAPI);
 }

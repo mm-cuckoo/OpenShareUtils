@@ -3,7 +3,6 @@ package com.cfox.openshare.open;
 import android.content.Context;
 
 import com.cfox.openshare.SHARE_MEDIA;
-import com.cfox.openshare.listener.AuthListener;
 import com.cfox.openshare.open.qq.QQCenter;
 
 /**

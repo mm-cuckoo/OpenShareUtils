@@ -1,7 +1,5 @@
 package com.cfox.openshare.open;
 
-import com.cfox.openshare.listener.AuthListener;
-
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
