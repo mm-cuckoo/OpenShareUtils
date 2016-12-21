@@ -24,6 +24,6 @@ public class QQConfig extends AbsConfig {
 
     @Override
     public boolean isAuthrized() {
-        return false;
+        return authInfo != null;
     }
 }

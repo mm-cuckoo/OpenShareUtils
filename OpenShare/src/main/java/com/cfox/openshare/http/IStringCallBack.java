@@ -9,6 +9,6 @@ package com.cfox.openshare.http;
  * <br/>************************************************
  */
 public interface IStringCallBack {
-    public void onSuccess(int code, String str);
-    public void onError(int code, String errorMsg);
+    void onSuccess(int code, String str);
+    void onError(int code, String errorMsg);
 }

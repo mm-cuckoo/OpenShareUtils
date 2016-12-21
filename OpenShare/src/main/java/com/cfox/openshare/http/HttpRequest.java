@@ -1,7 +1,5 @@
 package com.cfox.openshare.http;
 
-import java.util.Map;
-
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
@@ -11,8 +9,14 @@ import java.util.Map;
  * <br/>************************************************
  */
 public class HttpRequest implements IHttpRequest {
+
     @Override
-    public void request(String url, Map<String, String> params, IStringCallBack callBack) {
+    public void requestToSting(ReqBuild reqBuild, IStringCallBack callBack) {
+
+    }
+
+    @Override
+    public void requestToBitmap(String reqUrl, IBitmapCallBack callBack) {
 
     }
 }

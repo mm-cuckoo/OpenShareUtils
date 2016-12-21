@@ -47,6 +47,8 @@ public class QShare implements IShare {
 
     private void shareDefault(ShareAPI shareAPI){
         final Bundle params = new Bundle();
+        QShareListener listener = new QShareListener();
+        listener.mShareListener = shareAPI.getShareListener();
 
         if (shareAPI.getTargetUrl() == null){
             OSLog.e(TAG,"TargetUrl is null");
@@ -89,6 +91,6 @@ public class QShare implements IShare {
                 params.putString(QQShare.SHARE_TO_QQ_APP_NAME,  shareAPI.getAppName());
         }
 
-        mTencent.shareToQQ(mActivity, params, new QShareListener());
+        mTencent.shareToQQ(mActivity, params,listener);
     }
 }

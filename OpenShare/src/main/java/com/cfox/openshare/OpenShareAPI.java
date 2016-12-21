@@ -2,7 +2,7 @@ package com.cfox.openshare;
 
 import com.cfox.openshare.http.IHttpRequest;
 import com.cfox.openshare.parse.IParse;
-import com.cfox.openshare.parse.JsonParse;
+import com.cfox.openshare.utils.OSLog;
 
 /**
  * <br/>************************************************
@@ -13,6 +13,7 @@ import com.cfox.openshare.parse.JsonParse;
  * <br/>************************************************
  */
 public class OpenShareAPI {
+    private static final String TAG = "OpenShareAPI";
 
     private static IParse sParse;
 
@@ -24,16 +25,16 @@ public class OpenShareAPI {
 
     public static IParse getParse(){
         if (OpenShareAPI.sParse == null){
-            OpenShareAPI.sParse = new JsonParse();
+            OSLog.e(TAG,"Not found IParse entity class");
         }
         return OpenShareAPI.sParse;
     }
 
-    public static IHttpRequest getsHttpRequest() {
+    public static IHttpRequest getHttpRequest() {
         return sHttpRequest;
     }
 
-    public static void setsHttpRequest(IHttpRequest sHttpRequest) {
+    public static void setHttpRequest(IHttpRequest sHttpRequest) {
         OpenShareAPI.sHttpRequest = sHttpRequest;
     }
 }

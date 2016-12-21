@@ -1,17 +1,13 @@
-package com.cfox.openshare;
+package com.cfox.openshare.open;
 
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
- * <br/>PACKAGE_NAME : com.cfox.openshare
+ * <br/>PACKAGE_NAME : com.cfox.openshare.open
  * <br/>AUTHOR : Machao
  * <br/>MSG :
  * <br/>************************************************
  */
-public enum SHARE_MEDIA {
-    QQ,
-    WEIXIN,
-    WEIXIN_CIRCLE,
-    SIAN,
-    QZONE
+public class OpenListener {
+
 }

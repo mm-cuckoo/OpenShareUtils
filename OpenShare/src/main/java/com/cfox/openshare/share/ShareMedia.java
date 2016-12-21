@@ -22,9 +22,10 @@ public class ShareMedia {
     public static final int SHARE_VIDEO     =   0x004;
     public static final int SHARE_MUSIC     =   0x005;
 
-    private String mMediaUrl;
-    private int mMediaType;
-    private ArrayList<String> mImageUrls;
+    private String mMediaUrl;                   //媒体url  如 音频 、视频 Url
+    private int mMediaType;                     //类型 SHARE_TEXT 等
+    private ArrayList<String> mImageUrls;       //分享的图片，如果是单张，去第 0 个
+    private int mImageRes = -1;
 
     public ShareMedia() {
         mMediaType = SHARE_DEFAULT;
@@ -51,6 +52,12 @@ public class ShareMedia {
         this.mMediaUrl = mMediaUrl;
         this.mMediaType = mMediaType;
         this.mImageUrls = mImageUrls;
+    }
+
+    public ShareMedia(@NonNull String mMediaUrl, @NonNull int mMediaType, @NonNull int mImageRes) {
+        this.mMediaUrl = mMediaUrl;
+        this.mMediaType = mMediaType;
+        this.mImageRes = mImageRes;
     }
 
     public String getMediaUrl() {
@@ -82,6 +89,8 @@ public class ShareMedia {
     }
 
     public String getImageUrl() {
+        if (mImageUrls == null)
+            return null;
         return mImageUrls.get(0);
     }
 
@@ -92,5 +101,13 @@ public class ShareMedia {
         }
         mImageUrls.clear();
         mImageUrls.add(imageUrl);
+    }
+
+    public int getmImageRes() {
+        return mImageRes;
+    }
+
+    public void setmImageRes(int mImageRes) {
+        this.mImageRes = mImageRes;
     }
 }

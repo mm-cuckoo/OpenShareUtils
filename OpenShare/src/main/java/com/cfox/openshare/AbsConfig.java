@@ -15,4 +15,5 @@ public abstract class AbsConfig implements IConfig {
     public String appId;
     public String appSecret;
     public Map<String,String> authInfo;
+    public Map<String,String> userInfo;
 }

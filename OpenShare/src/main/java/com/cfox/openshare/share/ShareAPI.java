@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 
 import com.cfox.openshare.SHARE_MEDIA;
+import com.cfox.openshare.share.qq.QZoneShare;
 import com.cfox.openshare.share.listener.IShareListener;
 import com.cfox.openshare.share.qq.QShare;
-import com.cfox.openshare.share.qq.QZoneShare;
 import com.cfox.openshare.share.qq.listener.QShareListener;
 import com.cfox.openshare.share.sina.SinaShare;
-import com.cfox.openshare.share.weixin.WeiXinShare;
+import com.cfox.openshare.share.weixin.WXShare;
 import com.tencent.tauth.Tencent;
 
 /**
@@ -26,7 +26,7 @@ public class ShareAPI {
     private Activity mActivity;
 
     private static SHARE_MEDIA sPlatform;   //分享平台
-    private String mAppName;         //应用名称
+    private String mAppName;                //应用名称
     private String mTitle;                  //分享title
     private String mText;                   //分享内容
     private String mTargetUrl;              //点击跳转
@@ -56,7 +56,8 @@ public class ShareAPI {
                 break;
 
             case WEIXIN:
-                mShare = new WeiXinShare();
+            case WEIXIN_CIRCLE:
+                mShare = new WXShare(mActivity,platform);
                 break;
 
             case SIAN:

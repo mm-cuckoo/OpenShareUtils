@@ -11,7 +11,11 @@ import java.util.Map;
  * <br/>************************************************
  */
 public class ReqBuild {
+
+    public static final String GET = "get";
+    public static final String POST = "post";
+
     public String reqType;
     public String reqUrl;
-    public Map<String,Object> params;
+    public Map<String, String> params;
 }

@@ -2,6 +2,8 @@ package com.cfox.openshare.listener;
 
 import com.cfox.openshare.SHARE_MEDIA;
 
+import java.util.Map;
+
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
@@ -10,7 +12,8 @@ import com.cfox.openshare.SHARE_MEDIA;
  * <br/>MSG :
  * <br/>************************************************
  */
-public interface IAuthListener extends IBackListener {
+public interface IBackListener {
+    void onComplete(SHARE_MEDIA shareMedia, Map<String, String> map);
 
-    void onCancel(SHARE_MEDIA shareMedia);
+    void onError(SHARE_MEDIA shareMedia, int errorCode, String errorMessage);
 }

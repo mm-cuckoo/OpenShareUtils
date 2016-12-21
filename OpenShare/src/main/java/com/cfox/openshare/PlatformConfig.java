@@ -1,7 +1,7 @@
 package com.cfox.openshare;
 
 import com.cfox.openshare.open.qq.QQConfig;
-import com.cfox.openshare.open.sina.WBConfig;
+import com.cfox.openshare.open.sina.SinaConfig;
 import com.cfox.openshare.open.weixin.WXConfig;
 import com.cfox.openshare.utils.OSLog;
 
@@ -40,7 +40,7 @@ public class PlatformConfig {
         OSLog.LOG_WE = l;
     }
 
-    private static void config(SHARE_MEDIA media , String appId, String appSecret){
+    private static void config(SHARE_MEDIA media ,String appId,String appSecret){
         switch (media){
             case QQ:
                 QQConfig qqConfig = (QQConfig) configs.get(media);
@@ -62,13 +62,13 @@ public class PlatformConfig {
                 configs.put(media,wxConfig);
                 break;
             case SIAN:
-                WBConfig wbConfig = (WBConfig) configs.get(media);
-                if (wbConfig == null){
-                    wbConfig = new WBConfig();
+                SinaConfig sinaConfig = (SinaConfig) configs.get(media);
+                if (sinaConfig == null){
+                    sinaConfig = new SinaConfig();
                 }
-                wbConfig.appId = appId;
-                wbConfig.appSecret = appSecret;
-                configs.put(media,wbConfig);
+                sinaConfig.appId = appId;
+                sinaConfig.appSecret = appSecret;
+                configs.put(media, sinaConfig);
                 break;
         }
     }

@@ -1,5 +1,8 @@
 package com.cfox.openshare.open;
 
+import com.cfox.openshare.listener.IAuthListener;
+import com.cfox.openshare.listener.IUserListener;
+
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
@@ -10,7 +13,9 @@ package com.cfox.openshare.open;
  */
 public interface ICenter {
 
-    public void login(AuthListener listener);
+    public void login(IAuthListener listener);
 
-    public void getUserInfo(AuthListener listener);
+    public void getUserInfo(IUserListener listener);
+
+    public void logout();
 }

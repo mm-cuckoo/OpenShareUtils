@@ -17,7 +17,8 @@ public class QShareListener implements IUiListener {
 
     public IShareListener mShareListener;
 
-    public QShareListener() {}
+    public QShareListener() {
+    }
 
     @Override
     public void onComplete(Object o) {

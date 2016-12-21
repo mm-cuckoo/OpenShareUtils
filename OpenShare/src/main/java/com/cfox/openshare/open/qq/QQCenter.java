@@ -6,6 +6,7 @@ import com.cfox.openshare.OpenShareAPI;
 import com.cfox.openshare.PlatformConfig;
 import com.cfox.openshare.SHARE_MEDIA;
 import com.cfox.openshare.listener.IAuthListener;
+import com.cfox.openshare.listener.IUserListener;
 import com.cfox.openshare.open.ICenter;
 import com.cfox.openshare.open.qq.listener.QOpenListener;
 import com.cfox.openshare.utils.OSLog;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 public class QQCenter implements ICenter {
 
+    private static final String TAG = "QQCenter";
     private Activity mActivity;
     private Tencent mTencent;
 
@@ -34,7 +36,7 @@ public class QQCenter implements ICenter {
         this.mActivity = activity;
         mQQConfig = (QQConfig) PlatformConfig.configs.get(SHARE_MEDIA.QQ);
         if (mQQConfig == null){
-            OSLog.e("openshare","place set appid and appSecret");
+            OSLog.e(TAG,"place set appid and appSecret");
             return;
         }
         mTencent = Tencent.createInstance(mQQConfig.appId, mActivity.getApplicationContext());
@@ -47,7 +49,7 @@ public class QQCenter implements ICenter {
     public void login(IAuthListener listener){
         if (!mTencent.isSessionValid()) {
             QOpenListener QOpenListener = new QOpenListener();
-            QOpenListener.sign = QOpenListener.LOGIN;
+            QOpenListener.sign = com.cfox.openshare.open.qq.listener.QOpenListener.LOGIN;
             QOpenListener.mParse = OpenShareAPI.getParse();
             QOpenListener.mListener = listener;
             mTencent.login(mActivity, "all", QOpenListener);
@@ -69,7 +71,7 @@ public class QQCenter implements ICenter {
      * 获取用户信息
      */
     @Override
-    public void getUserInfo(IAuthListener listener){
+    public void getUserInfo(IUserListener listener){
 
         QQConfig qqConfig = (QQConfig) PlatformConfig.configs.get(SHARE_MEDIA.QQ);
 
@@ -88,7 +90,7 @@ public class QQCenter implements ICenter {
 
 
         QOpenListener QOpenListener = new QOpenListener();
-        QOpenListener.sign = QOpenListener.LOGIN;
+        QOpenListener.sign = com.cfox.openshare.open.qq.listener.QOpenListener.USER_INFO;
         QOpenListener.mParse = OpenShareAPI.getParse();
         QOpenListener.mListener = listener;
 

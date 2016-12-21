@@ -1,27 +1,28 @@
-package com.cfox.openshare.open.weixin;
+package com.cfox.openshare.open.sina;
 
 import com.cfox.openshare.AbsConfig;
 import com.cfox.openshare.SHARE_MEDIA;
-import com.cfox.openshare.share.weixin.WXShare;
-import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 
 /**
  * <br/>************************************************
  * <br/>PROJECT_NAME : Hlsenior
- * <br/>PACKAGE_NAME : com.cfox.openshare.open.weixin
+ * <br/>PACKAGE_NAME : com.cfox.openshare.open.sina
  * <br/>AUTHOR : Machao
  * <br/>MSG :
  * <br/>************************************************
  */
-public class WXConfig  extends AbsConfig {
-    public SendAuth.Resp mResp;
+public class SinaConfig extends AbsConfig {
 
-    public WXCenter mWXCenter;
-    public WXShare mWXShare;
+    /**
+     * 封装了 "access_token"，"expires_in"，"refresh_token"，并提供了他们的管理功能
+     */
+    public Oauth2AccessToken mAccessToken;
+
 
     @Override
     public SHARE_MEDIA getName() {
-        return SHARE_MEDIA.WEIXIN;
+        return SHARE_MEDIA.SIAN;
     }
 
     @Override
@@ -31,6 +32,6 @@ public class WXConfig  extends AbsConfig {
 
     @Override
     public boolean isAuthrized() {
-        return authInfo != null;
+        return mAccessToken != null;
     }
 }
