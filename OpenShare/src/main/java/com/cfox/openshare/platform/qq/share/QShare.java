@@ -49,6 +49,7 @@ public class QShare implements IShare {
         final Bundle params = new Bundle();
         QShareListener listener = new QShareListener();
         listener.mShareListener = shareAPI.getShareListener();
+        listener.mShareMedia = SHARE_MEDIA.QQ;
 
         if (shareAPI.getTargetUrl() == null){
             OSLog.e(TAG,"TargetUrl is null");
@@ -59,7 +60,7 @@ public class QShare implements IShare {
             shareAPI.withMedia(new ShareMedia());
         }
 
-        switch (shareAPI.getShareMedia().getMediaType()){
+        switch (shareAPI.getShareMedia().getMediaType()) {
             case ShareMedia.SHARE_IMGE:
                 /**
                  * Share local image

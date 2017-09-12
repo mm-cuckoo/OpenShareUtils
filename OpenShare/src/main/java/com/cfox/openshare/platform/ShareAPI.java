@@ -125,8 +125,8 @@ public class ShareAPI {
     }
 
     public static void activityResultData(int requestCode, int resultCode, Intent data) {
-        if (ShareAPI.sPlatform == SHARE_MEDIA.QQ) {
-            Tencent.onActivityResultData(requestCode, resultCode, data, new QShareListener());
+        if (ShareAPI.sPlatform == SHARE_MEDIA.QQ || ShareAPI.sPlatform == SHARE_MEDIA.QZONE) {
+            Tencent.onActivityResultData(requestCode, resultCode, data, null);
         }
     }
 

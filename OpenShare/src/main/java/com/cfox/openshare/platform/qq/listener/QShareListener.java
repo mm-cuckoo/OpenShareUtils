@@ -17,6 +17,8 @@ public class QShareListener implements IUiListener {
 
     public IShareListener mShareListener;
 
+    public SHARE_MEDIA mShareMedia;
+
     public QShareListener() {
     }
 
@@ -24,18 +26,18 @@ public class QShareListener implements IUiListener {
     public void onComplete(Object o) {
 
         if (mShareListener != null)
-            mShareListener.onSuccess(SHARE_MEDIA.QQ);
+            mShareListener.onSuccess(mShareMedia);
     }
 
     @Override
     public void onError(UiError uiError) {
         if (mShareListener != null)
-            mShareListener.onError(SHARE_MEDIA.QQ,uiError.errorCode,uiError.errorMessage);
+            mShareListener.onError(mShareMedia,uiError.errorCode,uiError.errorMessage);
     }
 
     @Override
     public void onCancel() {
         if (mShareListener != null)
-            mShareListener.onCancel(SHARE_MEDIA.QQ);
+            mShareListener.onCancel(mShareMedia);
     }
 }

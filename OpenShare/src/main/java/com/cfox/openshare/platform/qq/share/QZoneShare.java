@@ -43,12 +43,15 @@ public class QZoneShare implements IShare {
 
     @Override
     public void share(ShareAPI shareAPI) {
+        QShareListener listener = new QShareListener();
+        listener.mShareListener = shareAPI.getShareListener();
+        listener.mShareMedia = SHARE_MEDIA.QZONE;
         final Bundle params = new Bundle();
         params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
         params.putString(QzoneShare.SHARE_TO_QQ_TITLE, shareAPI.getTitle());//必填
         params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, shareAPI.getText());//选填
         params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL,shareAPI.getTargetUrl());//必填
         params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, shareAPI.getShareMedia().getImageUrls());
-        mTencent.shareToQzone(mActivity, params, new QShareListener());
+        mTencent.shareToQzone(mActivity, params, listener);
     }
 }
